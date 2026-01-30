@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkpfbeaeddv2"]
+
+[ext_resource type="Script" uid="uid://b8gec3tan2x3v" path="res://Scripts/CellularAutomataDemo.cs" id="1_nc3lt"]
+[ext_resource type="PackedScene" uid="uid://cdb01yrlux48e" path="res://Scenes/UI/CellularControls.tscn" id="2_1vskf"]
+
+[node name="CellularAutomataDemo" type="Node2D"]
+script = ExtResource("1_nc3lt")
+
+[node name="CellularControls" parent="." instance=ExtResource("2_1vskf")]
+position = Vector2(1, -2)

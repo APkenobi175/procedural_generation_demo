@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7x6yk2kgrc8v"]
+
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_w0piv"]
+
+[node name="PerlinControls" type="Node2D"]
+position = Vector2(2, -42)
+
+[node name="ControlContainer" type="VBoxContainer" parent="."]
+offset_left = 1.0
+offset_top = 89.0
+offset_right = 199.0
+offset_bottom = 628.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Hide" type="Button" parent="ControlContainer"]
+layout_mode = 2
+text = "Hide Options
+"
+
+[node name="ShowHideContainer" type="VBoxContainer" parent="ControlContainer"]
+layout_mode = 2
+
+[node name="ChunkWidth" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Width:"
+
+[node name="WidthSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Height:"
+
+[node name="HeightSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Use FMB"
+
+[node name="NosieOctaves" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Noise Octaves:"
+
+[node name="NoiseSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Seed" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Seed (0) for Random"
+
+[node name="LineEdit" type="LineEdit" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="DeepWater" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Deep Water Threshold:"
+
+[node name="DeepWaterSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="ShallowWater" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Shallow Water Threshold:"
+
+[node name="ShallowWaterSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Beach" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Beach Threshold:"
+
+[node name="BeachSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Grass" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Grass:"
+
+[node name="GrassSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Mountain" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Mountain Threshold:"
+
+[node name="MountainSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Regenerate World
+"
+
+[node name="CommonDemoHud" parent="." instance=ExtResource("1_w0piv")]
+position = Vector2(593, 45)

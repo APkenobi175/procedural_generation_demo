@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdb01yrlux48e"]
+
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_0ge5b"]
+[ext_resource type="Script" uid="uid://dfpcty4oles05" path="res://Scripts/UI/CellularControls.cs" id="1_n6xa2"]
+
+[node name="CellularControls" type="Node2D"]
+script = ExtResource("1_n6xa2")
+
+[node name="ControlContainer" type="VBoxContainer" parent="."]
+offset_left = 7.0
+offset_top = 109.0
+offset_right = 203.0
+offset_bottom = 423.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Hide" type="Button" parent="ControlContainer"]
+layout_mode = 2
+text = "Hide Options
+"
+
+[node name="ShowHideContainer" type="VBoxContainer" parent="ControlContainer"]
+layout_mode = 2
+
+[node name="ChunkWidth" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Width:"
+
+[node name="WidthSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Height:"
+
+[node name="HeightSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="NumSteps" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Num Steps:"
+
+[node name="StepSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Seed" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Seed (0) for Random"
+
+[node name="LineEdit" type="LineEdit" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+
+[node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Regenerate World
+"
+
+[node name="CommonDemoHud" parent="." instance=ExtResource("1_0ge5b")]
+position = Vector2(596, 6)

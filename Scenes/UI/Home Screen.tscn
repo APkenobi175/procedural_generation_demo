@@ -1,21 +1,47 @@
-[gd_scene format=3 uid="uid://djd3myvl476qv"]
+[gd_scene load_steps=4 format=3 uid="uid://djd3myvl476qv"]
+
+[ext_resource type="Script" uid="uid://t68m3e68h8or" path="res://Scripts/UI/HomeScreen.cs" id="1_cdiqd"]
+[ext_resource type="Theme" uid="uid://bhg1217m4l86f" path="res://Assets/Themes/Title.tres" id="2_vamip"]
+
+[sub_resource type="Theme" id="Theme_5j2fw"]
+default_font_size = 13
 
 [node name="HomeScreen" type="CanvasLayer"]
+script = ExtResource("1_cdiqd")
 
 [node name="HomeContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -3.0
+offset_left = 101.0
+offset_top = 82.0
+offset_right = -101.0
+offset_bottom = -93.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="HomeContainer"]
+[node name="Title" type="Label" parent="HomeContainer"]
 layout_mode = 2
+theme = ExtResource("2_vamip")
 text = "Procedural Generation Demos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="HomeContainer"]
+[node name="ToCell" type="Button" parent="HomeContainer"]
 layout_mode = 2
 text = "Cellular Automata"
+
+[node name="ToPerlin" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "Perlin Noise"
+
+[node name="ExitGame" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "Exit Demo"
+
+[node name="CreatedBy" type="Label" parent="HomeContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5j2fw")
+text = "Created By: Ammon Phipps"
+horizontal_alignment = 1
+vertical_alignment = 1

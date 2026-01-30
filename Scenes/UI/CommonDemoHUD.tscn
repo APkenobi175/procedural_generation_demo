@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://22l6kpf2fabk"]
+
+[ext_resource type="Script" uid="uid://8g1yk3q7j7k5" path="res://Scripts/UI/CommonDemoHud.cs" id="1_5sxkd"]
+
+[node name="CommonDemoHud" type="Node2D"]
+position = Vector2(597, 4)
+script = ExtResource("1_5sxkd")
+
+[node name="MenuButton" type="Button" parent="."]
+offset_left = -13.0
+offset_top = -1.0
+offset_right = 40.0
+offset_bottom = 30.0
+text = "Menu"
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+offset_left = -14.0
+offset_top = 32.0
+offset_right = 41.0
+offset_bottom = 98.0
+
+[node name="Home" type="Button" parent="MenuContainer"]
+layout_mode = 2
+text = "Home"
+
+[node name="Exit" type="Button" parent="MenuContainer"]
+layout_mode = 2
+text = "Exit"
