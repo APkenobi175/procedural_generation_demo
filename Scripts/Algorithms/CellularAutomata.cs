@@ -45,6 +45,9 @@ public static class CellularAutomata
         //2. If a cell has more than 4 alive neighbors, it becomes alive
         //3. If a cell has less than 4 alive neighbors, it becomes dead
         //4. Repeat for the number of steps specified
+        // We will change the hardcoded 4 into a variable birthLimit and surviveLimit, that way if we want to, in the future that could be a changeable parameter to see
+        // What interesting patterns emerge
+        // We will also do the same thing with the density. For now though these variables will be hardcoded into the function call
 
         for (int i = 0; i < steps; i++)
         {
