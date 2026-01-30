@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://bxm0yhd5jesxx" path="res://Scripts/DrawGridView.cs" id="1_475jg"]
 
 [node name="DrawGridView" type="Node2D"]
+position = Vector2(301, 191)
 script = ExtResource("1_475jg")

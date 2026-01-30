@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkpfbeaeddv2"]
+[gd_scene load_steps=5 format=3 uid="uid://dkpfbeaeddv2"]
 
 [ext_resource type="Script" uid="uid://b8gec3tan2x3v" path="res://Scripts/CellularAutomataDemo.cs" id="1_nc3lt"]
 [ext_resource type="PackedScene" uid="uid://cdb01yrlux48e" path="res://Scenes/UI/CellularControls.tscn" id="2_1vskf"]
+[ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="2_llvpg"]
+[ext_resource type="PackedScene" uid="uid://ch50y7ba05888" path="res://Scenes/World/DrawGridView.tscn" id="3_wy68s"]
 
 [node name="CellularAutomataDemo" type="Node2D"]
 script = ExtResource("1_nc3lt")
 
+[node name="WorldCamera2d" parent="." instance=ExtResource("2_llvpg")]
+position = Vector2(320, 180)
+
+[node name="DrawGridView" parent="." instance=ExtResource("3_wy68s")]
+position = Vector2(320, 183)
+
 [node name="CellularControls" parent="." instance=ExtResource("2_1vskf")]
-position = Vector2(1, -2)
+position = Vector2(0, -1)

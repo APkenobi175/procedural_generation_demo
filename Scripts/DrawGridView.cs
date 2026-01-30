@@ -4,61 +4,35 @@ public partial class DrawGridView : Node2D
 {
     [Export] public int CellSize = 8;
 
-    private bool[,] _cells;
-    private float[,] _heights;
-    private bool _useHeights;
+    private bool[,] grid;
 
-    public void SetCells(bool[,] cells)
+    public void SetGrid(bool[,] newGrid)
     {
-        _cells = cells;
-        _useHeights = false;
-        QueueRedraw();
-    }
-
-    public void SetHeights(float[,] heights)
-    {
-        _heights = heights;
-        _useHeights = true;
+        grid = newGrid;
         QueueRedraw();
     }
 
     public override void _Draw()
     {
-        if (!_useHeights && _cells == null) return;
-        if (_useHeights && _heights == null) return;
+    GD.Print($"grid null? {grid == null}, CellSize: {CellSize}");
 
-        if (!_useHeights)
-            DrawBoolGrid();
-        else
-            DrawHeightGrid();
-    }
+    DrawRect(new Rect2(0,0,200,200), Colors.Red);
+    if (grid == null) return;
 
-    private void DrawBoolGrid()
+    int h = grid.GetLength(0);
+    int w = grid.GetLength(1);
+
+    for (int y = 0; y < h; y++)
+    for (int x = 0; x < w; x++)
     {
-        int h = _cells.GetLength(0);
-        int w = _cells.GetLength(1);
-
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
-        {
-            // alive = wall/land, dead = empty/water (your choice)
-            var c = _cells[y, x] ? Colors.White : Colors.Black;
-            DrawRect(new Rect2(x * CellSize, y * CellSize, CellSize, CellSize), c);
-        }
+        Color color = grid[y, x] ? Colors.Green : Colors.Blue;
+        DrawRect(new Rect2(x * CellSize, y * CellSize, CellSize, CellSize), color);
+    }
     }
 
-    private void DrawHeightGrid()
-    {
-        int h = _heights.GetLength(0);
-        int w = _heights.GetLength(1);
-
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
-        {
-            float v = _heights[y, x]; // assume 0..1
-            // Quick grayscale visualization (we’ll do biomes in the Perlin demo controller)
-            var c = new Color(v, v, v);
-            DrawRect(new Rect2(x * CellSize, y * CellSize, CellSize, CellSize), c);
-        }
-    }
 }
+    
+    
+
+
+

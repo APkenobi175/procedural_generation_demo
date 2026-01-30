@@ -12,16 +12,17 @@ public partial class HomeScreen : CanvasLayer
         CellularAutomataButton = GetNode<Button>("HomeContainer/ToCell");
         PerlinNoiseButton = GetNode<Button>("HomeContainer/ToPerlin");
         ExitGame = GetNode<Button>("HomeContainer/ExitGame");
+        CellularAutomataButton.Pressed += OnCeullarButtonPressed;
+        PerlinNoiseButton.Pressed += OnPerlinButtonPressed;
+        ExitGame.Pressed += OnExitButtonPressed; 
 
 
     }
 
     public override void _Process(double delta)
     {
-     // Button Controls
-     CellularAutomataButton.Pressed += OnCeullarButtonPressed;
-     PerlinNoiseButton.Pressed += OnPerlinButtonPressed;
-     ExitGame.Pressed += OnExitButtonPressed;   
+     
+  
     }
 
 

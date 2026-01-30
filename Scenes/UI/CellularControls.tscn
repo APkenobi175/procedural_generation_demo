@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_0ge5b"]
 [ext_resource type="Script" uid="uid://dfpcty4oles05" path="res://Scripts/UI/CellularControls.cs" id="1_n6xa2"]
 
-[node name="CellularControls" type="Node2D"]
+[node name="CellularControls" type="CanvasLayer"]
 script = ExtResource("1_n6xa2")
 
 [node name="ControlContainer" type="VBoxContainer" parent="."]
@@ -27,6 +27,9 @@ text = "Chunk Width:"
 
 [node name="WidthSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = 10.0
+max_value = 300.0
+value = 100.0
 
 [node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -34,6 +37,9 @@ text = "Chunk Height:"
 
 [node name="HeightSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = 10.0
+max_value = 300.0
+value = 100.0
 
 [node name="NumSteps" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -48,6 +54,8 @@ text = "Seed (0) for Random"
 
 [node name="LineEdit" type="LineEdit" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+text = "0"
+placeholder_text = "0"
 
 [node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2

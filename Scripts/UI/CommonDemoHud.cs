@@ -15,13 +15,14 @@ public partial class CommonDemoHud : Node2D
         exitButton = GetNode<Button>("MenuContainer/Exit");
         menuContainer = GetNode<VBoxContainer>("MenuContainer");
         menuContainer.Visible = false; // Hide the menu at start
+        menuButton.Pressed += OnMenuPressed;
+        homeButton.Pressed += OnHomePressed;
+        exitButton.Pressed += OnExitPressed;
     }
 
     public override void _Process(double delta)
     {
-        menuButton.Pressed += OnMenuPressed;
-        homeButton.Pressed += OnHomePressed;
-        exitButton.Pressed += OnExitPressed;
+
 
     }
 
