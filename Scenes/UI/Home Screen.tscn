@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://djd3myvl476qv"]
+
+[node name="HomeScreen" type="CanvasLayer"]
+
+[node name="HomeContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HomeContainer"]
+layout_mode = 2
+text = "Procedural Generation Demos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "Cellular Automata"
