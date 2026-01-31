@@ -61,7 +61,8 @@ placeholder_text = "0"
 [node name="enableTiling" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
 text = "Enable Tiling 
-(Press Regenerate)"
+(Press Regenerate)
+*DOES NOT WORK*"
 
 [node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
