@@ -22,7 +22,6 @@ public partial class CellularControls : CanvasLayer
     public Button regenerateButton;
 
 
-
     public override void _Ready()
     {
         HideButton = GetNode<Button>("ControlContainer/Hide");
@@ -63,6 +62,7 @@ public partial class CellularControls : CanvasLayer
         EmitSignal(SignalName.ParametersChanged); // when we press the button we emit the signal
         GD.Print("Parameters Changed Signal Emitted");
     }
+
 }
 
 

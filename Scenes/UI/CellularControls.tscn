@@ -29,7 +29,7 @@ text = "Chunk Width:"
 layout_mode = 2
 min_value = 10.0
 max_value = 300.0
-value = 100.0
+value = 30.0
 
 [node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -39,7 +39,7 @@ text = "Chunk Height:"
 layout_mode = 2
 min_value = 10.0
 max_value = 300.0
-value = 100.0
+value = 30.0
 
 [node name="NumSteps" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -47,6 +47,7 @@ text = "Num Steps:"
 
 [node name="StepSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+step = 5.0
 
 [node name="Seed" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -56,6 +57,11 @@ text = "Seed (0) for Random"
 layout_mode = 2
 text = "0"
 placeholder_text = "0"
+
+[node name="enableTiling" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Enable Tiling 
+(Press Regenerate)"
 
 [node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2

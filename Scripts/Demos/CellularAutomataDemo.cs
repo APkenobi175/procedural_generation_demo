@@ -3,16 +3,20 @@ using System;
 
 public partial class CellularAutomataDemo : Node
 {
+    private CellularTiles cellularTiles;
     private DrawGridView drawGridView;
     private Node controls;
+
+    public CheckBox enableTilingCheckbox;
 
     public override void _Ready()
     {
         drawGridView = GetNode<DrawGridView>("DrawGridView");
         controls = GetNode<Node>("CellularControls");
+        cellularTiles = GetNode<CellularTiles>("CellularTiles");
 
-        // if the signal is emmited from the controls node, we call SetupDemo, and print that we recieved the signal
 
+        // If you get the parameters changed signals, rerender the demo
 
         if (controls is CellularControls cc)
         {
@@ -25,7 +29,7 @@ public partial class CellularAutomataDemo : Node
         }
 
 
-        SetupDemo(); // after refs + connect
+        SetupDemo(); 
     }
 
     private void SetupDemo()
@@ -35,19 +39,24 @@ public partial class CellularAutomataDemo : Node
         HSlider heightSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/HeightSlider");
         HSlider stepsSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/StepSlider"); 
         LineEdit seedBox     = controls.GetNode<LineEdit>("ControlContainer/ShowHideContainer/LineEdit");  
+        enableTilingCheckbox = controls.GetNode<CheckBox>("ControlContainer/ShowHideContainer/enableTiling");
 
         int chunkWidth  = (int)widthSlider.Value;
         int chunkHeight = (int)heightSlider.Value;
         int numSteps    = (int)stepsSlider.Value;
-
+        bool enableTiling = enableTilingCheckbox.ButtonPressed;
+        GD.Print("Enable Tiling Checkbox: " + enableTiling.ToString());
 
 
         int seed = int.TryParse(seedBox.Text, out int s) ? s : 0;
-
+        // if the seed is 0, generate a random seed
         if (seed == 0)
         {
             seed = rng.Next(); // random seed
         }
+
+
+        // generate the cellular automata grid we are defaulting to without tiling
 
         bool[,] grid = CellularAutomata.Generate(
             chunkWidth,
@@ -58,8 +67,34 @@ public partial class CellularAutomataDemo : Node
             4,
             seed
         );
-        GD.Print($"$ generated w={grid.GetLength(1)} h = {grid.GetLength(0)}");
 
-        drawGridView.SetGrid(grid);
+        GD.Print($"Generated w={grid.GetLength(1)} h={grid.GetLength(0)}");
+        
+        // If enable tiling is checked, render with tiling, otherwise render without tiling
+        if (enableTiling)
+        {
+            // make the cellular tiles layer visible and the draw grid view invisible
+            cellularTiles.Layer.Visible = true;
+
+            RenderWithTiling(grid);
+        }
+        else
+        {
+            GD.Print("Rendering WITHOUT tiling enabled");
+            cellularTiles.Layer.Visible = false;
+            drawGridView.Visible = true;
+            drawGridView.SetGrid(grid);
+        }
+
     }
+
+    private void RenderWithTiling(bool[,] grid)
+    {
+        GD.Print("Rendering WITH tiling enabled");
+
+        drawGridView.Visible = false; 
+        cellularTiles.RenderTerrainsFromGrid(grid);
+    }
+
+
 }
