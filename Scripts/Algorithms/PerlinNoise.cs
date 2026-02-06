@@ -1,132 +1,131 @@
 using System;
 
+using Godot;
+
 public static class PerlinNoise
 {
-    public static float[,] Generate2D(
-        int width, int height,
-        int seed,
-        int octaves,
-        float lacunarity,
-        float persistence,
-        float scale)
+
+    // 1. Gradient vectors for 2D Perlin noise
+    // These are the 4 unit vectors pointing to the corners of a square
+    private static readonly Vector2[] Gradients = new Vector2[]
     {
-        float[,] map = new float[height, width];
+        new Vector2(1, 1),
+        new Vector2(-1, 1),
+        new Vector2(1, -1),
+        new Vector2(-1, -1),
+    };
 
-        // Prevent division by zero / ugly “everything same”
-        if (scale <= 0.0001f) scale = 0.0001f;
 
-        var rng = new Random(seed);
+    // 2. Permutation table for hashing
 
-        // Precompute octave offsets (gives nicer variety)
-        float[] offX = new float[octaves];
-        float[] offY = new float[octaves];
-        for (int i = 0; i < octaves; i++)
+    private static int[] P = null;
+    private static int currentSeed = int.MinValue;
+
+    // Function to set the seed and generate permutation table
+    public static void SetSeed(int seed)
+    {
+        if (P != null && seed == currentSeed)
         {
-            offX[i] = (float)(rng.NextDouble() * 20000 - 10000);
-            offY[i] = (float)(rng.NextDouble() * 20000 - 10000);
+            return; // No need to regenerate if the seed hasn't changed, but remember 0 means random, but that is handled in PerlinNoiseDemo.cs
         }
 
-        float minV = float.MaxValue;
-        float maxV = float.MinValue;
-
-        for (int y = 0; y < height; y++)
-        for (int x = 0; x < width; x++)
+        currentSeed = seed;
+        // 3. Make 0-255 array and shuffle it based on the seed
+        int[] perm = new int[256];
+        //4. Set the seed for randomization
+        Random rand = new Random(seed);
+        for (int i = 0; i<256; i++)
         {
-            float amplitude = 1f;
-            float frequency = 1f;
-            float value = 0f;
-
-            for (int o = 0; o < octaves; o++)
-            {
-                float sx = (x / scale) * frequency + offX[o];
-                float sy = (y / scale) * frequency + offY[o];
-
-                value += Noise(sx, sy, seed) * amplitude;
-
-                amplitude *= persistence;
-                frequency *= lacunarity;
-            }
-
-            if (value < minV) minV = value;
-            if (value > maxV) maxV = value;
-
-            map[y, x] = value;
+            int j = rand.Next(i+1); // Random index from 0 to i
+            (perm[i], perm[j]) = (perm[j], perm[i]); // Swap
         }
 
-        // Normalize to 0..1
-        float range = maxV - minV;
-        for (int y = 0; y < height; y++)
-        for (int x = 0; x < width; x++)
-            map[y, x] = (map[y, x] - minV) / (range == 0 ? 1 : range);
-
-        return map;
+        //5. Duplicate to size 512
+        P = new int[512];
+        for (int i = 0; i < 512; i++)
+        {
+            P[i] = perm[i & 255]; // Wrap around using bitwise AND
+        }
     }
 
-    // 2D gradient noise
-    private static float Noise(float x, float y, int seed)
+    // Function to compute Perlin noise value at (x, y)
+
+    public static float Noise2D(float x, float y, int seed = 0)
     {
-        int x0 = FastFloor(x);
-        int y0 = FastFloor(y);
+        SetSeed(seed);
+
+        // 1. integer coordinates of the square containing the point
+        int x0 = (int)Math.Floor(x);
+        int y0 = (int)Math.Floor(y);
         int x1 = x0 + 1;
         int y1 = y0 + 1;
 
-        float sx = x - x0;
-        float sy = y - y0;
+        //2. Get the decimal part of the coordinates
+        float dx = x - x0;
+        float dy = y - y0;
 
-        float n0 = DotGridGradient(x0, y0, x, y, seed);
-        float n1 = DotGridGradient(x1, y0, x, y, seed);
-        float ix0 = Lerp(n0, n1, Fade(sx));
+        //3. Wrap the integer coordinates to 0-255 for hashing
+        int X0 = x0 & 255; // Wrap to 0-255
+        int Y0 = y0 & 255;
+        int X1 = x1 & 255;
+        int Y1 = y1 & 255;
 
-        n0 = DotGridGradient(x0, y1, x, y, seed);
-        n1 = DotGridGradient(x1, y1, x, y, seed);
-        float ix1 = Lerp(n0, n1, Fade(sx));
+        // 4. Hash the coordinates 
 
-        float v = Lerp(ix0, ix1, Fade(sy));
+        int p00 = P[P[X0] + Y0];
+        int p10 = P[P[X1] + Y0];
+        int p01 = P[P[X0] + Y1];
+        int p11 = P[P[X1] + Y1];
 
-        // Convert from roughly -1..1 to -1..1 (already), keep as is
-        return v;
+        // 5. Get the gradient vectors for the corners
+        int g00 = p00 % Gradients.Length;
+        int g10 = p10 % Gradients.Length;
+        int g01 = p01 % Gradients.Length;
+        int g11 = p11 % Gradients.Length;
+
+        // 6. Compute the dot product between the gradient and the distance vector
+        float d00 = Gradients[g00].Dot(new Vector2(dx, dy));
+        float d10 = Gradients[g10].Dot(new Vector2(dx - 1f, dy));
+        float d01 = Gradients[g01].Dot(new Vector2(dx, dy - 1f));
+        float d11 = Gradients[g11].Dot(new Vector2(dx - 1f, dy - 1f));
+
+        // 7. Smooth interpolation using formula from notes (t * t * t * (t * (t * 6 - 15) + 10))
+
+        float sx = dx * dx * dx * (dx * (dx * 6 - 15) + 10);
+        float sy = dy * dy * dy * (dy * (dy * 6 - 15) + 10);
+
+        // 8. Lerp along x and then along y
+        float ix0 = Mathf.Lerp(d00, d10, sx);
+        float ix1 = Mathf.Lerp(d01, d11, sx);
+        float result = Mathf.Lerp(ix0, ix1, sy);
+
+        return result; // all done
+
     }
 
-    private static float DotGridGradient(int ix, int iy, float x, float y, int seed)
+
+
+    // Fractal Noise OCTAVES
+    public static float Fractal2D(float x, float y, int octaves, float persistence, int seed = 0)
     {
-        // Pseudo-random gradient from hash
-        int h = Hash(ix, iy, seed);
-        // 8 directions
-        float gx, gy;
-        switch (h & 7)
+        float total = 0f;
+        float frequency = 1f;
+        float amplitude = 1f;
+        float maxValue = 0f; // Used for normalizing result to [-1, 1]
+
+
+
+        for (int i = 0; i< octaves; i++)
         {
-            case 0: gx = 1;  gy = 0;  break;
-            case 1: gx = -1; gy = 0;  break;
-            case 2: gx = 0;  gy = 1;  break;
-            case 3: gx = 0;  gy = -1; break;
-            case 4: gx = 0.7071f;  gy = 0.7071f;  break;
-            case 5: gx = -0.7071f; gy = 0.7071f;  break;
-            case 6: gx = 0.7071f;  gy = -0.7071f; break;
-            default: gx = -0.7071f; gy = -0.7071f; break;
+            total += Noise2D(x * frequency, y * frequency, seed + i) * amplitude;
+
+            maxValue += amplitude;
+
+            amplitude *= persistence; // Decrease amplitude for next octave
+            frequency *= 2f; // Increase frequency for next octave
         }
 
-        float dx = x - ix;
-        float dy = y - iy;
+        return (maxValue > 0f) ? total / maxValue : 0f; 
 
-        return dx * gx + dy * gy;
     }
-
-    private static int Hash(int x, int y, int seed)
-    {
-        unchecked
-        {
-            int h = seed;
-            h ^= x * 374761393;
-            h = (h << 13) | (h >> 19);
-            h ^= y * 668265263;
-            h *= 1274126177;
-            return h;
-        }
-    }
-
-    private static int FastFloor(float f) => (f >= 0) ? (int)f : (int)f - 1;
-
-    private static float Fade(float t) => t * t * t * (t * (t * 6 - 15) + 10);
-
-    private static float Lerp(float a, float b, float t) => a + (b - a) * t;
 }
