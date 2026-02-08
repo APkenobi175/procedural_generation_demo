@@ -13,11 +13,11 @@ public partial class PerlinControls : CanvasLayer
     public int chunkHeight;
     public int noiseOctaves;
     public int seed;
-    public int deepWaterThreshold;
-    public int shallowWaterThreshold;
-    public int beachThreshold;
-    public int grassThreshold;
-    public int mountainThreshold;
+    public float deepWaterThreshold;
+    public float shallowWaterThreshold;
+    public float beachThreshold;
+    public float grassThreshold;
+    public float mountainThreshold;
 
     // Labels for Sliders
     public Label chunkWidthLabel;
@@ -44,6 +44,11 @@ public partial class PerlinControls : CanvasLayer
 
     public Button regenerateButton;
 
+    // Scale slider 
+
+    public Label scaleLabel;
+    public float scaleValue;
+
     public override void _Ready()
     {
         HideButton = GetNode<Button>("ControlContainer/Hide");
@@ -60,6 +65,7 @@ public partial class PerlinControls : CanvasLayer
         beachThresholdLabel = GetNode<Label>("ControlContainer/ShowHideContainer/Beach");
         grassThresholdLabel = GetNode<Label>("ControlContainer/ShowHideContainer/Grass");
         mountainThresholdLabel = GetNode<Label>("ControlContainer/ShowHideContainer/Mountain");
+        scaleLabel = GetNode<Label>("ControlContainer/ShowHideContainer/ScaleLabel");
 
         // Get CheckBox
         useFbmBox = GetNode<CheckBox>("ControlContainer/ShowHideContainer/CheckBox");
@@ -76,11 +82,12 @@ public partial class PerlinControls : CanvasLayer
         chunkWidth = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/WidthSlider").Value;
         chunkHeight = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/HeightSlider").Value;
         noiseOctaves = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/NoiseSlider").Value;
-        deepWaterThreshold = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/DeepWaterSlider").Value;
-        shallowWaterThreshold = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/ShallowWaterSlider").Value;
-        beachThreshold = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/BeachSlider").Value;
-        grassThreshold = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/GrassSlider").Value;
-        mountainThreshold = (int)GetNode<HSlider>("ControlContainer/ShowHideContainer/MountainSlider").Value;
+        deepWaterThreshold = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/DeepWaterSlider").Value;
+        shallowWaterThreshold = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/ShallowWaterSlider").Value;
+        beachThreshold = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/BeachSlider").Value;
+        grassThreshold = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/GrassSlider").Value;
+        mountainThreshold = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/MountainSlider").Value;
+        scaleValue = (float)GetNode<HSlider>("ControlContainer/ShowHideContainer/ScaleSlider").Value;
         // update the labels with the new values
         chunkWidthText = "Chunk Width: " + chunkWidth.ToString();
         chunkHeightText = "Chunk Height: " + chunkHeight.ToString();
@@ -90,6 +97,7 @@ public partial class PerlinControls : CanvasLayer
         beachThresholdText = "Beach Threshold: " + beachThreshold.ToString();
         grassThresholdText = "Grass Threshold: " + grassThreshold.ToString();
         mountainThresholdText = "Mountain Threshold: " + mountainThreshold.ToString();
+        scaleLabel.Text = "Scale (EXPERIMENTAL): " + scaleValue.ToString("F3");
 
         chunkWidthLabel.Text = chunkWidthText;
         chunkHeightLabel.Text = chunkHeightText;

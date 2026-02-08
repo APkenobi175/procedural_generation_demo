@@ -4,11 +4,11 @@ using System;
 public partial class PerlinNoiseDemo : Node2D
 {
     private Node controls;
-    private TextureRect noiseView;
+    private DrawNoiseView drawNoiseView;
 
     public override void _Ready()
     {
-        noiseView = GetNode<TextureRect>("NoiseView");
+        drawNoiseView = GetNode<DrawNoiseView>("DrawNoiseView");
         controls = GetNode<Node>("PerlinControls");
 
         if (controls is PerlinControls pc)
@@ -28,26 +28,29 @@ public partial class PerlinNoiseDemo : Node2D
     {
         Random rng = new Random();
 
-        // --- Read UI values
-        HSlider widthSlider   = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/ChunkWidth");
-        HSlider heightSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/ChunkHeight");
 
-        CheckBox useFbmBox    = controls.GetNode<CheckBox>("ControlContainer/ShowHideContainer/UseFBM");
-        HSlider octavesSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/NoiseOctaves");
-        LineEdit seedBox      = controls.GetNode<LineEdit>("ControlContainer/ShowHideContainer/SeedLineEdit");
+        // --- Read UI values
+        HSlider widthSlider   = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/WidthSlider");
+        HSlider heightSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/HeightSlider");
+
+        CheckBox useFbmBox    = controls.GetNode<CheckBox>("ControlContainer/ShowHideContainer/CheckBox");
+        HSlider octavesSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/NoiseSlider");
+        LineEdit seedBox      = controls.GetNode<LineEdit>("ControlContainer/ShowHideContainer/LineEdit");
 
         // thresholds
-        HSlider deepSlider     = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/DeepWaterThreshold");
-        HSlider shallowSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/ShallowWaterThreshold");
-        HSlider beachSlider    = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/BeachThreshold");
-        HSlider grassSlider    = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/GrassThreshold");
-        HSlider mountainSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/MountainThreshold");
+        HSlider deepSlider     = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/DeepWaterSlider");
+        HSlider shallowSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/ShallowWaterSlider");
+        HSlider beachSlider    = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/BeachSlider");
+        HSlider grassSlider    = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/GrassSlider");
+        HSlider mountainSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/MountainSlider");
+        HSlider scaleSlider      = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/ScaleSlider");
 
         int chunkWidth = (int)widthSlider.Value;
         int chunkHeight = (int)heightSlider.Value;
         bool useFbm = useFbmBox.ButtonPressed;
         int octaves = (int)octavesSlider.Value;
         int seed = int.TryParse(seedBox.Text, out int s) ? s : 0;
+        
         // if the seed is 0, generate a random seed
         if (seed == 0)        {
             seed = rng.Next(); // random seed
@@ -59,42 +62,18 @@ public partial class PerlinNoiseDemo : Node2D
         float grassThreshold = (float)grassSlider.Value;
         float mountainThreshold = (float)mountainSlider.Value;
 
-        float scale = 0.05f;
+        drawNoiseView.SetThresholds(deepThreshold, shallowThreshold, beachThreshold, grassThreshold, mountainThreshold);
+
+
+        float scale = (float)scaleSlider.Value; // put this in a slider in the UI
         float persistence = 0.5f;
-        float lacunarity = 2.0f;
+        float lacunarity = 0.5f;
         // Generate the noise map based on the parameters
         float[,] noiseValues = GenerateNoiseMap(chunkWidth, chunkHeight, seed, useFbm, octaves, scale, persistence, lacunarity);
-
-        Image img = Image.Create(chunkWidth, chunkHeight, false, Image.Format.Rgb8);
-
-        for (int y = 0; y < chunkHeight; y++)
-            {
-                for (int x = 0; x < chunkWidth; x++)
-                {
-                    // Based on the noise value lets assign a color for the terrain type
-                    float v = noiseValues[y, x];
-                    Color color;
-                    if (v < deepThreshold)
-                        color = new Color(0, 0, 0.5f); // Deep Water
-                    else if (v < shallowThreshold)
-                        color = new Color(0, 0, 1); // Shallow Water
-                    else if (v < beachThreshold)
-                        color = new Color(0.76f, 0.7f, 0.5f); // Beach
-                    else if (v < grassThreshold)
-                        color = new Color(0, 1, 0); // Grass
-                    else if (v < mountainThreshold)
-                        color = new Color(0.5f, 0.5f, 0); // Mountain
-                    else
-                        color = new Color(1, 1, 1); // Snow
-                    img.SetPixel(x, y, color);
-
-                }
-            }
-
-                ImageTexture tex = ImageTexture.CreateFromImage(img);
-                noiseView.Texture = tex;
-        
+        drawNoiseView.Visible = true;
+        drawNoiseView.SetNoise(noiseValues);
     }
+
 
     private float[,] GenerateNoiseMap(int width, int height, int seed, bool useFbm, int octaves, float scale, float persistence, float lacunarity)
     {
@@ -120,11 +99,13 @@ public partial class PerlinNoiseDemo : Node2D
                     noiseValue = PerlinNoise.Noise2D(x * scale + ox, y * scale + oy, seed);
                 }
                 // Normalize to [0, 1]
-                noiseMap[y, x] = (noiseValue + 1) / 2f;
+                noiseMap[y, x] = noiseValue;
             }
         }
 
             return noiseMap;
     }
+
+    
    
 }

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgl48b6nu7ato"]
+
+[ext_resource type="Script" uid="uid://kegw2wlgf6cy" path="res://Scripts/World/DrawNoiseView.cs" id="1_vf2x7"]
+
+[node name="DrawNoiseView" type="Node2D"]
+position = Vector2(0, -1)
+script = ExtResource("1_vf2x7")

@@ -1,23 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dkpfbeaeddv2"]
+[gd_scene load_steps=6 format=3 uid="uid://dkpfbeaeddv2"]
 
 [ext_resource type="Script" uid="uid://b8gec3tan2x3v" path="res://Scripts/Demos/CellularAutomataDemo.cs" id="1_nc3lt"]
 [ext_resource type="PackedScene" uid="uid://cdb01yrlux48e" path="res://Scenes/UI/CellularControls.tscn" id="2_1vskf"]
 [ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="2_llvpg"]
 [ext_resource type="PackedScene" uid="uid://ch50y7ba05888" path="res://Scenes/World/DrawGridView.tscn" id="3_wy68s"]
-[ext_resource type="Script" uid="uid://c2nk3uxbax7cj" path="res://Scripts/Tiling/CellularTiles.cs" id="4_a54gd"]
 [ext_resource type="PackedScene" uid="uid://pbbe3isghxp8" path="res://Scenes/Tile Layers/CellularTiles.tscn" id="5_8uxip"]
 
 [node name="CellularAutomataDemo" type="Node2D"]
+position = Vector2(-26, -24)
 script = ExtResource("1_nc3lt")
 
 [node name="WorldCamera2d" parent="." instance=ExtResource("2_llvpg")]
-position = Vector2(320, 180)
+position = Vector2(346, 204)
 
 [node name="CellularTiles" parent="." instance=ExtResource("5_8uxip")]
-position = Vector2(151, 62)
-script = ExtResource("4_a54gd")
+position = Vector2(0, 0)
 
 [node name="DrawGridView" parent="." instance=ExtResource("3_wy68s")]
-position = Vector2(151, 62)
+position = Vector2(0, 0)
 
 [node name="CellularControls" parent="." instance=ExtResource("2_1vskf")]

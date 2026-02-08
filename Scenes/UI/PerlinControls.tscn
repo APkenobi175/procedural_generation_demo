@@ -27,6 +27,9 @@ text = "Chunk Width:"
 
 [node name="WidthSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = 10.0
+max_value = 5000.0
+value = 1000.0
 
 [node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -34,9 +37,13 @@ text = "Chunk Height:"
 
 [node name="HeightSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = 10.0
+max_value = 5000.0
+value = 1000.0
 
 [node name="CheckBox" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+button_pressed = true
 text = "Use FMB"
 
 [node name="NosieOctaves" type="Label" parent="ControlContainer/ShowHideContainer"]
@@ -45,6 +52,8 @@ text = "Noise Octaves:"
 
 [node name="NoiseSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+max_value = 20.0
+value = 8.0
 
 [node name="Seed" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -52,6 +61,7 @@ text = "Seed (0) for Random"
 
 [node name="LineEdit" type="LineEdit" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+text = "0"
 
 [node name="DeepWater" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -59,6 +69,10 @@ text = "Deep Water Threshold:"
 
 [node name="DeepWaterSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = -0.99
+max_value = 1.0
+step = 0.01
+value = -0.39
 
 [node name="ShallowWater" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -66,6 +80,10 @@ text = "Shallow Water Threshold:"
 
 [node name="ShallowWaterSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = -0.99
+max_value = 1.0
+step = 0.01
+value = -0.30999999999999994
 
 [node name="Beach" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -73,6 +91,10 @@ text = "Beach Threshold:"
 
 [node name="BeachSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = -0.99
+max_value = 1.0
+step = 0.01
+value = -0.16000000000000003
 
 [node name="Grass" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -80,6 +102,10 @@ text = "Grass:"
 
 [node name="GrassSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = -0.99
+max_value = 1.0
+step = 0.01
+value = 0.06000000000000005
 
 [node name="Mountain" type="Label" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
@@ -87,6 +113,21 @@ text = "Mountain Threshold:"
 
 [node name="MountainSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
+min_value = -0.99
+max_value = 1.0
+step = 0.01
+value = 0.3699999999999999
+
+[node name="ScaleLabel" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Scale (EXPIREMENT): "
+
+[node name="ScaleSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+min_value = 0.001
+max_value = 0.05
+step = 0.001
+value = 0.005
 
 [node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2

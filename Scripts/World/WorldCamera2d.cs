@@ -6,9 +6,9 @@ public partial class WorldCamera2d : Camera2D
     //TODO: We want to add the ability to zoom, and pan the camera
 
     [Export]
-    public float ZoomStep = 0.1f; // The amount to zoom in/out with each step
+    public float ZoomStep = 0.05f; // The amount to zoom in/out with each step
     [Export]
-    public float MinZoom = 0.2f; // Minimum zoom level
+    public float MinZoom = 0.02f; // Minimum zoom level
     [Export]
     public float MaxZoom = 4.0f; // Maximum zoom level
 
@@ -17,7 +17,23 @@ public partial class WorldCamera2d : Camera2D
 
 
 
+    public override void _Ready()
+    {
+        // Set the initial zoom level
+        if (GameManager.Instance.CellularActive){
+            // More zoomed in for cellular automata since the grid is smaller and we want to see more detail
+            Zoom = new Vector2(0.25f, 0.25f);
+        }
+         else if (GameManager.Instance.PerlinActive)
+        {
+                Zoom = new Vector2(.02f, .02f);
+            }
+            else
+            {
+                Zoom = new Vector2(.02f, .02f);
+        }
 
+    }
     public override void _UnhandledInput(InputEvent e)
     {
         if (e is InputEventMouseButton mb)

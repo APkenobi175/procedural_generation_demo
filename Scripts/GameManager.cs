@@ -7,6 +7,10 @@ public partial class GameManager : Node
     public static GameManager Instance { get; private set; } // Instance of the GameManager
     public Dictionary<string, PackedScene> Levels = new(); // Dictionary for valid levels (one for perlin noise, one for automata) this is using godots system.collections.generic
 
+    // Use these to determine camera startout position and zoom level for each demo
+    public bool CellularActive = false;
+    public bool PerlinActive = false;
+
     public override void _Ready()
     {
         // Set up all the scenes in a dictionary for easy access
@@ -20,5 +24,16 @@ public partial class GameManager : Node
     public void GoTo (string key)
     {
         GetTree().ChangeSceneToPacked(Levels[key]); // Change the scene to the one associated with the key. We can call this function on the buttons in the home screen or the back button in the UI
+        // used to determine starting position for camera
+        if (key == "Cellular")
+        {
+            CellularActive = true;
+            PerlinActive = false;
+        }
+        else if (key == "Perlin")
+        {
+            CellularActive = false;
+            PerlinActive = true;
+        }
     }
 }

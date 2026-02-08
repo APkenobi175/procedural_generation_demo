@@ -24,29 +24,29 @@ public static class PerlinNoise
     // Function to set the seed and generate permutation table
     public static void SetSeed(int seed)
     {
-        if (P != null && seed == currentSeed)
-        {
-            return; // No need to regenerate if the seed hasn't changed, but remember 0 means random, but that is handled in PerlinNoiseDemo.cs
-        }
-
+        if (P != null && seed == currentSeed) return;
         currentSeed = seed;
-        // 3. Make 0-255 array and shuffle it based on the seed
-        int[] perm = new int[256];
-        //4. Set the seed for randomization
-        Random rand = new Random(seed);
-        for (int i = 0; i<256; i++)
-        {
-            int j = rand.Next(i+1); // Random index from 0 to i
-            (perm[i], perm[j]) = (perm[j], perm[i]); // Swap
-        }
 
-        //5. Duplicate to size 512
+        int[] perm = new int[256];
+
+        // Initialize the permutation with values 0-255
+
+        for (int i = 0; i < 256; i++)
+            perm[i] = i;
+
+        // Shuffle the permutation using the seed.
+        Random rand = new Random(seed);
+        for (int i = 255; i > 0; i--)
+        {
+            int j = rand.Next(i + 1);
+            (perm[i], perm[j]) = (perm[j], perm[i]);
+        }
+        // Duplicate the permutation
         P = new int[512];
         for (int i = 0; i < 512; i++)
-        {
-            P[i] = perm[i & 255]; // Wrap around using bitwise AND
-        }
+            P[i] = perm[i & 255];
     }
+
 
     // Function to compute Perlin noise value at (x, y)
 
@@ -111,13 +111,13 @@ public static class PerlinNoise
         float total = 0f;
         float frequency = 1f;
         float amplitude = 1f;
-        float maxValue = 0f; // Used for normalizing result to [-1, 1]
+        float maxValue = 0f; // Used for normalizing result to 0 to 1
 
 
 
         for (int i = 0; i< octaves; i++)
         {
-            total += Noise2D(x * frequency, y * frequency, seed + i) * amplitude;
+            total += Noise2D(x * frequency, y * frequency, seed) * amplitude;
 
             maxValue += amplitude;
 
