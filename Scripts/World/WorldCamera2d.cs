@@ -27,11 +27,16 @@ public partial class WorldCamera2d : Camera2D
          else if (GameManager.Instance.PerlinActive)
         {
                 Zoom = new Vector2(.02f, .02f);
-            }
-            else
-            {
-                Zoom = new Vector2(.02f, .02f);
         }
+        else if(GameManager.Instance.WFCActive)  
+        {
+                Zoom = new Vector2(.10f, .10f);
+        }
+        else
+        {
+            Zoom = new Vector2(0.1f, 0.1f); // Default zoom level for other demos
+        }
+
 
     }
     public override void _UnhandledInput(InputEvent e)

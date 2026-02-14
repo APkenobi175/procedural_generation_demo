@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqr8jb7b8h1n7"]
+
+[ext_resource type="Script" uid="uid://crgpl05m6ctad" path="res://Scripts/UI/WaveControls.cs" id="1_2bfch"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_i3i6m"]
+
+[node name="WaveControls" type="CanvasLayer"]
+script = ExtResource("1_2bfch")
+
+[node name="ControlContainer" type="VBoxContainer" parent="."]
+offset_left = 7.0
+offset_top = 109.0
+offset_right = 203.0
+offset_bottom = 423.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Hide" type="Button" parent="ControlContainer"]
+layout_mode = 2
+text = "Hide Options
+"
+
+[node name="ShowHideContainer" type="VBoxContainer" parent="ControlContainer"]
+layout_mode = 2
+
+[node name="ChunkWidth" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Width:"
+
+[node name="WidthSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 300.0
+value = 50.0
+
+[node name="ChunkHeight" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Chunk Height:"
+
+[node name="HeightSlider" type="HSlider" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 300.0
+value = 50.0
+
+[node name="WeightSet" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Weight Set:"
+
+[node name="WeightSetOptions" type="OptionButton" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "All Tiles"
+popup/item_0/id = 0
+popup/item_1/text = "No Intersections"
+popup/item_1/id = 1
+popup/item_2/text = "Short Walls"
+popup/item_2/id = 2
+popup/item_3/text = "All - Perfer Intersections"
+popup/item_3/id = 3
+
+[node name="Seed" type="Label" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Seed (0) for Random"
+
+[node name="LineEdit" type="LineEdit" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "0"
+placeholder_text = "0"
+
+[node name="enableTiling" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Enable TileMap Layer"
+
+[node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
+layout_mode = 2
+text = "Regenerate World
+"
+
+[node name="CommonDemoHud" parent="." instance=ExtResource("1_i3i6m")]

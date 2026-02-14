@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://lqmng4l5061s"]
+
+[ext_resource type="PackedScene" uid="uid://cqr8jb7b8h1n7" path="res://Scenes/UI/WaveControls.tscn" id="1_3itw0"]
+[ext_resource type="Script" uid="uid://bhxx55py3jq5i" path="res://Scripts/Demos/WaveFunctionCollapse.cs" id="1_5dn76"]
+[ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="2_5dn76"]
+[ext_resource type="PackedScene" uid="uid://c4v20cim0yjtr" path="res://Scenes/World/DrawWaveView.tscn" id="3_85jjl"]
+[ext_resource type="TileSet" uid="uid://ba3yqac100evf" path="res://Assets/Tiles/Tile Sets/WaveTiles.tres" id="4_m715y"]
+
+[node name="WaveFunctionCollapse" type="Node2D"]
+position = Vector2(-2, -1)
+script = ExtResource("1_5dn76")
+
+[node name="WaveControls" parent="." instance=ExtResource("1_3itw0")]
+
+[node name="WorldCamera2d" parent="." instance=ExtResource("2_5dn76")]
+
+[node name="DrawWaveView" parent="." node_paths=PackedStringArray("Layer") instance=ExtResource("3_85jjl")]
+position = Vector2(318, 154)
+Layer = NodePath("../TileMapLayer")
+SourceId = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("4_m715y")

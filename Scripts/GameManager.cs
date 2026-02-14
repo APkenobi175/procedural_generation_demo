@@ -10,6 +10,7 @@ public partial class GameManager : Node
     // Use these to determine camera startout position and zoom level for each demo
     public bool CellularActive = false;
     public bool PerlinActive = false;
+    public bool WFCActive = false;
 
     public override void _Ready()
     {
@@ -19,6 +20,10 @@ public partial class GameManager : Node
         Levels["MainMenu"] = GD.Load<PackedScene>("Scenes/Main.tscn");
         Levels["Cellular"] = GD.Load<PackedScene>("Scenes/Demos/CellularAutomataDemo.tscn");
         Levels["Perlin"] = GD.Load<PackedScene>("Scenes/Demos/PerlinNoiseDemo.tscn");
+        Levels["WFC"] = GD.Load<PackedScene>("Scenes/Demos/WaveFunctionCollapse.tscn");
+        // COMING SOON:
+        Levels["BSP"] = GD.Load<PackedScene>("Scenes/Demos/BinarySpacePartitioning.tscn");
+        Levels["RandomWalk"] = GD.Load<PackedScene>("Scenes/Demos/RandomWalk.tscn");
     }
 
     public void GoTo (string key)
@@ -34,6 +39,17 @@ public partial class GameManager : Node
         {
             CellularActive = false;
             PerlinActive = true;
+        } else if (key == "WFC")
+        {
+            CellularActive = false;
+            PerlinActive = false;
+            WFCActive = true;
+        }
+        else
+        {
+            CellularActive = false;
+            PerlinActive = false;
+            WFCActive = false;
         }
     }
 }

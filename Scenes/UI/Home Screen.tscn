@@ -35,6 +35,18 @@ text = "Cellular Automata"
 layout_mode = 2
 text = "Perlin Noise"
 
+[node name="ToWFC" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "Wave Function Collapste"
+
+[node name="ToBSP" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "BSP (COMING SOON)"
+
+[node name="ToRandomWalk" type="Button" parent="HomeContainer"]
+layout_mode = 2
+text = "Random Walk (COMING SOON)"
+
 [node name="ExitGame" type="Button" parent="HomeContainer"]
 layout_mode = 2
 text = "Exit Demo"

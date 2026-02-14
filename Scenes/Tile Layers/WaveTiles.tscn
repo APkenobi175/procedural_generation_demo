@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvuo7robhnsnm"]
+
+[ext_resource type="TileSet" uid="uid://ba3yqac100evf" path="res://Assets/Tiles/Tile Sets/WaveTiles.tres" id="1_1elvg"]
+
+[node name="WaveTiles" type="TileMapLayer"]
+tile_set = ExtResource("1_1elvg")

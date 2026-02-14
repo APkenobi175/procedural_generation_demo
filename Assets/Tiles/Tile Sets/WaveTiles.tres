@@ -1,0 +1,30 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ba3yqac100evf"]
+
+[ext_resource type="Texture2D" uid="uid://cpkp535rknubt" path="res://Assets/Tiles/roads2W.png" id="1_nipbp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_62fbq"]
+resource_name = "16 Tiles"
+texture = ExtResource("1_nipbp")
+margins = Vector2i(16, 16)
+texture_region_size = Vector2i(32, 32)
+10:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+3:2/0 = 0
+2:3/0 = 0
+1:4/0 = 0
+6:0/0 = 0
+4:0/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+6:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+10:2/0 = 0
+8:2/0 = 0
+12:2/0 = 0
+14:2/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/2 = SubResource("TileSetAtlasSource_62fbq")

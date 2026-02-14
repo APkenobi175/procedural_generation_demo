@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4v20cim0yjtr"]
+
+[ext_resource type="Script" uid="uid://cudiwh81c2a42" path="res://Scripts/World/DrawWaveView.cs" id="1_mhhxj"]
+
+[node name="DrawWaveView" type="Node2D"]
+script = ExtResource("1_mhhxj")

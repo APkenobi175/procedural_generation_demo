@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck4vl7d2sybj"]
+
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_15yrs"]
+
+[node name="BinarySpacePartitioning" type="Node2D"]
+
+[node name="CommonDemoHud" parent="." instance=ExtResource("1_15yrs")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 254.0
+offset_top = 156.0
+offset_right = 356.0
+offset_bottom = 205.0
+text = "Coming Soon
+"
