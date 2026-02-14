@@ -85,17 +85,25 @@ public partial class WaveFunctionCollapse : Node2D
     }
 
     // -------------------------------------------------------
-    // Weight Sets (your requested presets)
+    // Weight Sets
     // 0: All Tiles
     // 1: No Intersections
     // 2: Short Walls
     // 3: All - Perfect Intersections
+    // 4: Favored Empty Space
+    // 5: No Dead Ends
+    // 6: All Straights
+    // 7: Favor Empty - No Dead Ends
     // -------------------------------------------------------
     private int[] GetWeightsForPreset(int selected)
     {
         if (selected == 1) return Preset_NoIntersections();
         if (selected == 2) return Preset_ShortWalls();
         if (selected == 3) return Preset_AllPerfectIntersections();
+        if (selected == 4) return Preset_FavoredEmpty();
+        if (selected == 5) return Preset_NoDeadEnds();
+        if (selected == 6) return Preset_AllStraights();
+        if (selected == 7) return Preset_FavorEmptyNoDeadEnds();
         return Preset_AllTiles();
     }
 
@@ -156,10 +164,59 @@ public partial class WaveFunctionCollapse : Node2D
         return w;
     }
 
-    // -------------------------------------------------------
-    // Constraint Rules: edge matching
-    // If current has edge in direction, neighbor must have edge in opposite direction.
-    // -------------------------------------------------------
+    private int[] Preset_FavoredEmpty()
+    {
+        // Favor empty tiles more, but still allow all
+        int[] w = new int[16];
+        for (int t = 0; t < 16; t++)
+        {
+            if (t == 0) w[t] = 20; // empty
+            else w[t] = 1;
+        }
+        return w;
+    }
+
+    private int[] Preset_NoDeadEnds()
+    {
+        // Disable dead ends (degree 1)
+        int[] w = new int[16];
+        for (int t = 0; t < 16; t++)
+        {
+            int deg = EdgeDegree(t);
+            if (deg == 1) w[t] = 0;
+            else w[t] = 1;
+        }
+        return w;
+    }
+
+    private int[] Preset_AllStraights()
+    {
+        // Favor straight paths (degree 2 straight) and empty, no intersections
+        int[] w = new int[16];
+        for (int t = 0; t < 16; t++)
+        {
+            int deg = EdgeDegree(t);
+            if (deg == 2 && !IsCorner(t)) w[t] = 10; // straights
+            else if (deg == 0) w[t] = 5;               // empty
+            else w[t] = 1;
+        }
+        return w;
+    }
+    private int[] Preset_FavorEmptyNoDeadEnds()
+    {
+        // Favor empty and straight paths, no dead ends, still allow intersections but low weight
+        int[] w = new int[16];
+        for (int t = 0; t < 16; t++)
+        {
+            int deg = EdgeDegree(t);
+            if (deg == 0) w[t] = 20; // empty
+            else if (deg == 2 && !IsCorner(t)) w[t] = 10; // straights
+            else if (deg == 1) w[t] = 0; // no dead ends
+            else w[t] = 1;
+        }
+        return w;
+    }
+
     private ushort[,] BuildRoadRules16()
     {
         ushort[,] rules = new ushort[16, 4];
@@ -177,7 +234,6 @@ public partial class WaveFunctionCollapse : Node2D
                     bool bEdge = HasEdge(b, Opp(dir));
                     if (aEdge == bEdge)
                     {
-                        // manual mask from your WFC constants
                         allowed = (ushort)(allowed | TileBitManual(b));
                     }
                 }
