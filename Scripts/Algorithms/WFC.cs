@@ -1,6 +1,3 @@
-// WFC.cs
-// Minimal, pseudocode-style WFC (bitmask version, 16 tiles, NO backtracking)
-
 using System;
 using System.Collections.Generic;
 
@@ -39,9 +36,6 @@ public sealed class WFC
 
     private Random rng; // initialized with seed in Initialize()
 
-    // ----------------------------
-    // Initialize (matches pseudocode)
-    // ----------------------------
     public void Initialize(int w, int h, ushort[,] rules, int[] tileWeights, int? seed = null)
     {
         width = w;

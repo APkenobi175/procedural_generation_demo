@@ -30,7 +30,7 @@ public partial class WorldCamera2d : Camera2D
         }
         else if(GameManager.Instance.WFCActive)  
         {
-                Zoom = new Vector2(.10f, .10f);
+                Zoom = new Vector2(.17f, .17f);
         }
         else
         {

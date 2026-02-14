@@ -75,10 +75,6 @@ layout_mode = 2
 text = "0"
 placeholder_text = "0"
 
-[node name="enableTiling" type="CheckBox" parent="ControlContainer/ShowHideContainer"]
-layout_mode = 2
-text = "Enable TileMap Layer"
-
 [node name="Generate" type="Button" parent="ControlContainer/ShowHideContainer"]
 layout_mode = 2
 text = "Regenerate World

@@ -11,7 +11,6 @@ public partial class WaveFunctionCollapse : Node2D
         drawWaveView = GetNode<DrawWaveView>("DrawWaveView");
         controls = GetNode<CanvasLayer>("WaveControls");
 
-        // If you have a WaveControls script that emits ParametersChanged like your other demos:
         WaveControls wc = controls as WaveControls;
         wc.Connect("ParametersChanged", new Callable(this, nameof(SetupDemo)));
         GD.Print("Finding DrawWaveView and connecting ParametersChanged signal from controls to SetupDemo");
@@ -25,7 +24,7 @@ public partial class WaveFunctionCollapse : Node2D
     private void SetupDemo()
     {
         GD.Print("SET UP DEMO RUNNING");
-        // ----- Read UI -----
+        // Read the ui
         HSlider widthSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/WidthSlider");
         GD.Print("Found width slider: " + (widthSlider != null).ToString());
         HSlider heightSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/HeightSlider");
@@ -42,18 +41,16 @@ public partial class WaveFunctionCollapse : Node2D
         if (!int.TryParse(seedBox.Text, out seed)) seed = 0;
         if (seed == 0) seed = new Random().Next();
 
-        // ----- Build weights from preset -----
         int[] weights = GetWeightsForPreset((int)preset.Selected);
 
-        // ----- Build constraint rules -----
+
         // Road rules based on edge matching (N/E/S/W bits in tile index)
         ushort[,] rules = BuildRoadRules16();
 
-        // ----- Run WFC (no backtracking) -----
         WFC wfc = new WFC();
         wfc.Initialize(w, h, rules, weights, seed);
 
-        // If contradiction happens, we can retry a few times with new seeds (still no backtracking)
+        // If contradiction happens, we can retry a few times with new seeds
         bool ok = false;
         int attempts = 20;
 
@@ -71,7 +68,7 @@ public partial class WaveFunctionCollapse : Node2D
             GD.PrintErr("WFC failed (contradiction). Try a different preset or smaller grid.");
         }
 
-        // ----- Convert result to tiles[,] for DrawWaveView -----
+
         int[,] tiles = new int[h, w];
         for (int y = 0; y < h; y++)
         for (int x = 0; x < w; x++)
@@ -79,7 +76,7 @@ public partial class WaveFunctionCollapse : Node2D
             tiles[y, x] = wfc.GetCollapsedTile(x, y);
         }
 
-        // ----- Render -----
+        // Render 
         GD.Print("Setting Tiles");
         drawWaveView.SetTiles(tiles);
     }
