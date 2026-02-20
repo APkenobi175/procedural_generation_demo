@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+
 public partial class CellularControls : CanvasLayer
 {
     private Button HideButton;
@@ -26,13 +27,19 @@ public partial class CellularControls : CanvasLayer
     {
         HideButton = GetNode<Button>("ControlContainer/Hide");
         ShowHideContainer = GetNode<VBoxContainer>("ControlContainer/ShowHideContainer");
-        ShowHideContainer.Visible = true; // Start with controls visible
-        HideButton.Pressed += OnHidePressed;
         chunkWidthLabel = GetNode<Label>("ControlContainer/ShowHideContainer/ChunkWidth");
         chunkHeightLabel = GetNode<Label>("ControlContainer/ShowHideContainer/ChunkHeight");
         numStepsLabel = GetNode<Label>("ControlContainer/ShowHideContainer/NumSteps");
         regenerateButton = GetNode<Button>("ControlContainer/ShowHideContainer/Generate");
-        regenerateButton.Pressed += onRegeneratePressed;
+        ShowHideContainer.Visible = true; // Start with controls visible
+        // If the hide button is pressed, we will toggle visbility by using the utility class
+        HideButton.Pressed += () =>
+        ProceduralGenerationUtilities.OnHideButtonPressed(HideButton, ShowHideContainer);
+    
+        regenerateButton.Pressed += () =>
+        ProceduralGenerationUtilities.OnRegenerateButtonPressed(this);
+
+
     }
 
     public override void _Process(double delta)
@@ -49,18 +56,6 @@ public partial class CellularControls : CanvasLayer
         chunkWidthLabel.Text = chunkWidthText;
         chunkHeightLabel.Text = chunkHeightText;
         numStepsLabel.Text = numStepsText;
-    }
-
-    public void OnHidePressed()
-    {
-        ShowHideContainer.Visible = !ShowHideContainer.Visible; // Toggle visibility
-        HideButton.Text = ShowHideContainer.Visible ? "Hide Controls" : "Show Controls";
-    }
-
-    public void onRegeneratePressed()
-    {
-        EmitSignal(SignalName.ParametersChanged); // when we press the button we emit the signal
-        GD.Print("Parameters Changed Signal Emitted");
     }
 
 }

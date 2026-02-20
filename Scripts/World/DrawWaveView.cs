@@ -32,22 +32,13 @@ public partial class DrawWaveView : Node
 
     public void SetTiles(int[,] newTiles)
     {
-        GD.Print("Setting new tiles and rendering...");
         tiles = newTiles;
         Render();
         centerMap();
-        GD.Print("Render complete.");
     }
 
     private void Render()
     {
-        GD.Print("Layer null? " + (Layer == null));
-        if (Layer != null)
-        {
-            GD.Print("TileSet null? " + (Layer.TileSet == null));
-            GD.Print("SourceId=" + SourceId);
-        }
-
         if (Layer == null) return;
         if (tiles == null) return;
 
@@ -56,14 +47,11 @@ public partial class DrawWaveView : Node
 
         Layer.Clear();
 
-        GD.Print("Layer.Visible=" + Layer.Visible);
 
         var ts = Layer.TileSet;
-        GD.Print("TileSet sources count=" + ts.GetSourceCount());
         for (int i = 0; i < ts.GetSourceCount(); i++)
         {
             int id = ts.GetSourceId(i);
-            GD.Print("Source index " + i + " => id " + id + " type=" + ts.GetSource(id).GetType().Name);
         }
 
 

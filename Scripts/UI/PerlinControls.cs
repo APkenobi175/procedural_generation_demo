@@ -54,7 +54,8 @@ public partial class PerlinControls : CanvasLayer
         HideButton = GetNode<Button>("ControlContainer/Hide");
         ShowHideContainer = GetNode<VBoxContainer>("ControlContainer/ShowHideContainer");
         ShowHideContainer.Visible = true; // Start with controls visible
-        HideButton.Pressed += OnHidePressed;
+        HideButton.Pressed += () =>
+        ProceduralGenerationUtilities.OnHideButtonPressed(HideButton, ShowHideContainer);
 
         // Get Labels
         chunkWidthLabel = GetNode<Label>("ControlContainer/ShowHideContainer/ChunkWidth");
@@ -72,7 +73,8 @@ public partial class PerlinControls : CanvasLayer
 
         // Regenerate Button
         regenerateButton = GetNode<Button>("ControlContainer/ShowHideContainer/Generate");
-        regenerateButton.Pressed += onRegeneratePressed;
+        regenerateButton.Pressed += () =>
+        ProceduralGenerationUtilities.OnRegenerateButtonPressed(this);
 
     }
 
@@ -110,18 +112,6 @@ public partial class PerlinControls : CanvasLayer
 
     }
 
-    public void OnHidePressed()
-    {
-        ShowHideContainer.Visible = !ShowHideContainer.Visible; // Toggle visibility
-        HideButton.Text = ShowHideContainer.Visible ? "Hide Controls" : "Show Controls";
-    }
-
-    public void onRegeneratePressed()
-    {
-        // Emit a signal to let the main scene know parameters have changed and it should regenerate the noise map
-        EmitSignal(SignalName.ParametersChanged);
-        GD.Print("Parameters Changed! Emitting signal to regenerate noise map...");
-    }
 
 
 

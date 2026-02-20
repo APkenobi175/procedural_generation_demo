@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdb01yrlux48e"]
 
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_0ge5b"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_0ge5b"]
 [ext_resource type="Script" uid="uid://dfpcty4oles05" path="res://Scripts/UI/CellularControls.cs" id="1_n6xa2"]
 
 [node name="CellularControls" type="CanvasLayer"]
 script = ExtResource("1_n6xa2")
 
 [node name="ControlContainer" type="VBoxContainer" parent="."]
-offset_left = 7.0
-offset_top = 109.0
-offset_right = 203.0
-offset_bottom = 423.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 355.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Hide" type="Button" parent="ControlContainer"]

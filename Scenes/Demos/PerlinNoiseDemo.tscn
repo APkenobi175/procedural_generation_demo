@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://th035xkwehpw" path="res://Scripts/Demos/PerlinNoiseDemo.cs" id="1_c3nvq"]
 [ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="2_acrkc"]
-[ext_resource type="PackedScene" uid="uid://b7x6yk2kgrc8v" path="res://Scenes/UI/PerlinControls.tscn" id="2_ghoeu"]
+[ext_resource type="PackedScene" uid="uid://b7x6yk2kgrc8v" path="res://Scenes/UI/DemoControls/PerlinControls.tscn" id="2_ghoeu"]
 [ext_resource type="PackedScene" uid="uid://cgl48b6nu7ato" path="res://Scenes/World/DrawNoiseView.tscn" id="3_lixwo"]
 
 [node name="PerlinNoiseDemo" type="Node2D"]

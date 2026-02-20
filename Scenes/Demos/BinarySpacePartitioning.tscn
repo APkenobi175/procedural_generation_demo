@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck4vl7d2sybj"]
 
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_15yrs"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_15yrs"]
 
 [node name="BinarySpacePartitioning" type="Node2D"]
 

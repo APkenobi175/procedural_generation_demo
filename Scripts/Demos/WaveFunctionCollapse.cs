@@ -13,9 +13,7 @@ public partial class WaveFunctionCollapse : Node2D
 
         WaveControls wc = controls as WaveControls;
         wc.Connect("ParametersChanged", new Callable(this, nameof(SetupDemo)));
-        GD.Print("Finding DrawWaveView and connecting ParametersChanged signal from controls to SetupDemo");
         drawWaveView = GetNode<DrawWaveView>("DrawWaveView");
-        GD.Print("Found DrawWaveView: " + (drawWaveView != null).ToString());
         SetupDemo(); // Initial setup
 
     }
@@ -23,16 +21,11 @@ public partial class WaveFunctionCollapse : Node2D
 
     private void SetupDemo()
     {
-        GD.Print("SET UP DEMO RUNNING");
         // Read the ui
         HSlider widthSlider  = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/WidthSlider");
-        GD.Print("Found width slider: " + (widthSlider != null).ToString());
         HSlider heightSlider = controls.GetNode<HSlider>("ControlContainer/ShowHideContainer/HeightSlider");
-        GD.Print("Found height slider: " + (heightSlider != null).ToString());
         LineEdit seedBox     = controls.GetNode<LineEdit>("ControlContainer/ShowHideContainer/LineEdit");
-        GD.Print("Found seed box: " + (seedBox != null).ToString());
         OptionButton preset  = controls.GetNode<OptionButton>("ControlContainer/ShowHideContainer/WeightSetOptions");
-        GD.Print("Found preset option button: " + (preset != null).ToString());
 
         int w = (int)widthSlider.Value;
         int h = (int)heightSlider.Value;
@@ -77,7 +70,6 @@ public partial class WaveFunctionCollapse : Node2D
         }
 
         // Render 
-        GD.Print("Setting Tiles");
         drawWaveView.SetTiles(tiles);
     }
 

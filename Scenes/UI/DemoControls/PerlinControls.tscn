@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://b7x6yk2kgrc8v"]
 
 [ext_resource type="Script" uid="uid://ce804nuimmgon" path="res://Scripts/UI/PerlinControls.cs" id="1_ph4xf"]
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_w0piv"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_w0piv"]
 
 [node name="PerlinControls" type="CanvasLayer"]
 script = ExtResource("1_ph4xf")
 
 [node name="ControlContainer" type="VBoxContainer" parent="."]
 offset_left = 2.0
-offset_top = 51.0
+offset_top = 4.0
 offset_right = 200.0
 offset_bottom = 590.0
 scale = Vector2(0.5, 0.5)

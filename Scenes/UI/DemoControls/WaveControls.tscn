@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqr8jb7b8h1n7"]
 
 [ext_resource type="Script" uid="uid://crgpl05m6ctad" path="res://Scripts/UI/WaveControls.cs" id="1_2bfch"]
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_i3i6m"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_i3i6m"]
 
 [node name="WaveControls" type="CanvasLayer"]
 script = ExtResource("1_2bfch")
 
 [node name="ControlContainer" type="VBoxContainer" parent="."]
-offset_left = 7.0
-offset_top = 109.0
-offset_right = 203.0
-offset_bottom = 423.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 253.0
+offset_bottom = 318.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Hide" type="Button" parent="ControlContainer"]

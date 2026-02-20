@@ -21,11 +21,10 @@ public partial class CellularAutomataDemo : Node
         if (controls is CellularControls cc)
         {
             cc.Connect("ParametersChanged", new Callable(this, nameof(SetupDemo)));
-            GD.Print("Connected ParametersChanged signal from controls to SetupDemo");
         }
         else
         {
-            GD.PrintErr("CellularControls node is NOT a CellularControls script instance.");
+            GD.PrintErr("Failed to connect ParametersChanged signal: controls node is not of type CellularControls");
         }
 
 
@@ -45,8 +44,6 @@ public partial class CellularAutomataDemo : Node
         int chunkHeight = (int)heightSlider.Value;
         int numSteps    = (int)stepsSlider.Value;
         bool enableTiling = enableTilingCheckbox.ButtonPressed;
-        GD.Print("Enable Tiling Checkbox: " + enableTiling.ToString());
-
 
         int seed = int.TryParse(seedBox.Text, out int s) ? s : 0;
         // if the seed is 0, generate a random seed
@@ -67,8 +64,6 @@ public partial class CellularAutomataDemo : Node
             4,
             seed
         );
-
-        GD.Print($"Generated w={grid.GetLength(1)} h={grid.GetLength(0)}");
         
         // If enable tiling is checked, render with tiling, otherwise render without tiling
         if (enableTiling)
@@ -80,7 +75,6 @@ public partial class CellularAutomataDemo : Node
         }
         else
         {
-            GD.Print("Rendering WITHOUT tiling enabled");
             cellularTiles.Layer.Visible = false;
             drawGridView.Visible = true;
             drawGridView.SetGrid(grid);
@@ -90,8 +84,6 @@ public partial class CellularAutomataDemo : Node
 
     private void RenderWithTiling(bool[,] grid)
     {
-        GD.Print("Rendering WITH tiling enabled");
-
         drawGridView.Visible = false; 
         cellularTiles.RenderTerrainsFromGrid(grid);
     }

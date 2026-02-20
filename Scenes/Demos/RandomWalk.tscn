@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8ywlwgnk8b5e"]
 
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/CommonDemoHUD.tscn" id="1_0ol2o"]
+[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_0ol2o"]
 
 [node name="RandomWalk" type="Node2D"]
 

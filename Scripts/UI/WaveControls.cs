@@ -36,7 +36,8 @@ public partial class WaveControls : CanvasLayer
         HideButton = GetNode<Button>("ControlContainer/Hide");
         ShowHideContainer = GetNode<VBoxContainer>("ControlContainer/ShowHideContainer");
         ShowHideContainer.Visible = true; // Start with controls visible
-        HideButton.Pressed += OnHidePressed;
+        HideButton.Pressed += () =>
+        ProceduralGenerationUtilities.OnHideButtonPressed(HideButton, ShowHideContainer);
 
         // Get Labels
         chunkWidthLabel = GetNode<Label>("ControlContainer/ShowHideContainer/ChunkWidth");
@@ -44,7 +45,8 @@ public partial class WaveControls : CanvasLayer
 
         // get regenerate button
         regenerateButton = GetNode<Button>("ControlContainer/ShowHideContainer/Generate");
-        regenerateButton.Pressed += onRegeneratePressed;
+        regenerateButton.Pressed += () => 
+        ProceduralGenerationUtilities.OnRegenerateButtonPressed(this);
 
     }
 
@@ -61,18 +63,6 @@ public partial class WaveControls : CanvasLayer
         chunkWidthLabel.Text = $"Chunk Width: {chunkWidth}";
         chunkHeightLabel.Text = $"Chunk Height: {chunkHeight}";
 
-    }
-
-
-
-    public void OnHidePressed()
-    {
-        ShowHideContainer.Visible = !ShowHideContainer.Visible; // Toggle visibility
-    }
-
-    public void onRegeneratePressed()
-    {
-        EmitSignal("ParametersChanged"); // Emit the signal to tell the demo to update
     }
 
 }
