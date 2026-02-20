@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class GameManager : Node
@@ -11,6 +12,8 @@ public partial class GameManager : Node
     public bool CellularActive = false;
     public bool PerlinActive = false;
     public bool WFCActive = false;
+    public bool BSPActive = false;
+    public bool RandomWalkActive = false;
 
     public override void _Ready()
     {
@@ -34,22 +37,49 @@ public partial class GameManager : Node
         {
             CellularActive = true;
             PerlinActive = false;
+            WFCActive = true;
+            BSPActive = false;
+            RandomWalkActive = false;
         }
         else if (key == "Perlin")
         {
             CellularActive = false;
             PerlinActive = true;
+            WFCActive = true;
+            BSPActive = false;
+            RandomWalkActive = false;
+
         } else if (key == "WFC")
         {
             CellularActive = false;
             PerlinActive = false;
             WFCActive = true;
+            BSPActive = false;
+            RandomWalkActive = false;
+        }
+        else if (key == "BSP")
+        {
+            CellularActive = false;
+            PerlinActive = false;
+            WFCActive = false;
+            BSPActive = true;
+            RandomWalkActive = false;
+        }
+         else if (key == "RandomWalk")
+        {
+            CellularActive = false;
+            PerlinActive = false;
+            WFCActive = false;
+            BSPActive = false;
+            RandomWalkActive = true;
         }
         else
         {
             CellularActive = false;
             PerlinActive = false;
             WFCActive = false;
+            BSPActive = false;
+            RandomWalkActive = false;
         }
     }
 }

@@ -32,6 +32,10 @@ public partial class WorldCamera2d : Camera2D
         {
                 Zoom = new Vector2(.17f, .17f);
         }
+        else if (GameManager.Instance.BSPActive)  
+        {
+                Zoom = new Vector2(.25f, .25f);
+        }
         else
         {
             Zoom = new Vector2(0.1f, 0.1f); // Default zoom level for other demos

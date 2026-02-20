@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqjexu0ma5q87"]
+
+[ext_resource type="Script" uid="uid://dcjlbemsasp2a" path="res://Scripts/World/DrawBspView.cs" id="1_nrn6j"]
+
+[node name="DrawBspView" type="Node2D"]
+script = ExtResource("1_nrn6j")

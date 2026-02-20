@@ -1,15 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck4vl7d2sybj"]
+[gd_scene load_steps=5 format=3 uid="uid://ck4vl7d2sybj"]
 
-[ext_resource type="PackedScene" uid="uid://22l6kpf2fabk" path="res://Scenes/UI/Main/CommonDemoHUD.tscn" id="1_15yrs"]
+[ext_resource type="Script" uid="uid://dhwpskjyvxr07" path="res://Scripts/Demos/BinarySpacePartitioningDemo.cs" id="1_ydxew"]
+[ext_resource type="PackedScene" uid="uid://brf3impubyds1" path="res://Scenes/UI/DemoControls/BSPControls.tscn" id="2_ydxew"]
+[ext_resource type="PackedScene" uid="uid://bqjexu0ma5q87" path="res://Scenes/World/DrawBSPView.tscn" id="3_mcu3i"]
+[ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="4_yam51"]
 
 [node name="BinarySpacePartitioning" type="Node2D"]
+script = ExtResource("1_ydxew")
 
-[node name="CommonDemoHud" parent="." instance=ExtResource("1_15yrs")]
+[node name="BspControls" parent="." instance=ExtResource("2_ydxew")]
 
-[node name="Label" type="Label" parent="."]
-offset_left = 254.0
-offset_top = 156.0
-offset_right = 356.0
-offset_bottom = 205.0
-text = "Coming Soon
-"
+[node name="DrawBspView" parent="." instance=ExtResource("3_mcu3i")]
+position = Vector2(304, 164)
+
+[node name="WorldCamera2d" parent="." instance=ExtResource("4_yam51")]
+position = Vector2(308, 180)
