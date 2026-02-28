@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://8ywlwgnk8b5e"]
+
+[ext_resource type="PackedScene" uid="uid://dltvw8n0vfem5" path="res://Scenes/UI/DemoControls/RandomWalkControls.tscn" id="1_0ol2o"]
+[ext_resource type="Script" uid="uid://bs123etl7511t" path="res://Scripts/Demos/RandomWalkDemo.cs" id="1_gk2px"]
+[ext_resource type="PackedScene" uid="uid://dyydcic3mtrkf" path="res://Scenes/World/DrawRandomWalkView.tscn" id="4_ykupa"]
+[ext_resource type="PackedScene" uid="uid://dfj82gk1deje6" path="res://Scenes/World/WorldCamera2D.tscn" id="5_gnqih"]
+
+[node name="RandomWalkDemo" type="Node2D"]
+script = ExtResource("1_gk2px")
+
+[node name="RandomWalkControls" parent="." instance=ExtResource("1_0ol2o")]
+
+[node name="WorldCamera2d" parent="." instance=ExtResource("5_gnqih")]
+
+[node name="DrawRandomWalkView" parent="." instance=ExtResource("4_ykupa")]

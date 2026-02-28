@@ -26,7 +26,7 @@ public partial class GameManager : Node
         Levels["WFC"] = GD.Load<PackedScene>("Scenes/Demos/WaveFunctionCollapse.tscn");
         // COMING SOON:
         Levels["BSP"] = GD.Load<PackedScene>("Scenes/Demos/BinarySpacePartitioning.tscn");
-        Levels["RandomWalk"] = GD.Load<PackedScene>("Scenes/Demos/RandomWalk.tscn");
+        Levels["RandomWalk"] = GD.Load<PackedScene>("Scenes/Demos/RandomWalkDemo.tscn");
     }
 
     public void GoTo (string key)

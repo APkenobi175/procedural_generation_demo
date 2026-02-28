@@ -13,7 +13,6 @@ public partial class WaveFunctionCollapse : Node2D
 
         WaveControls wc = controls as WaveControls;
         wc.Connect("ParametersChanged", new Callable(this, nameof(SetupDemo)));
-        drawWaveView = GetNode<DrawWaveView>("DrawWaveView");
         SetupDemo(); // Initial setup
 
     }

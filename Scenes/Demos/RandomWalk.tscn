@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://8ywlwgnk8b5e"]
-
-[ext_resource type="PackedScene" uid="uid://dltvw8n0vfem5" path="res://Scenes/UI/DemoControls/RandomWalkControls.tscn" id="1_0ol2o"]
-
-[node name="RandomWalk" type="Node2D"]
-
-[node name="RandomWalkControls" parent="." instance=ExtResource("1_0ol2o")]

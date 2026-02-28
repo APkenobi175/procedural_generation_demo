@@ -73,7 +73,6 @@ public partial class DrawWaveView : Node
         int h = tiles.GetLength(0);
         int w = tiles.GetLength(1);
 
-        // tile size in pixels (must match your atlas tile size)
         float tileSize = 16f;
 
         float mapW = w * tileSize;

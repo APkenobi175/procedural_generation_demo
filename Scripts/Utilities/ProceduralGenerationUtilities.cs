@@ -2,6 +2,7 @@
 
 using Godot;
 using System;
+using System.Collections.Generic;
 public static class ProceduralGenerationUtilities
 {
     public static void OnHideButtonPressed(Button hideButton, VBoxContainer showHideContainer)
@@ -41,6 +42,15 @@ public static class ProceduralGenerationUtilities
         else
         {
             GD.PrintErr("Unknown control layer type: " + controlLayer.GetType());
+        }
+    }
+
+    public static void ShuffleArray<T>(List<T> list, Random rng)
+    {
+        for (int i = list.Count - 1; i>0; i --)
+        {
+            int j = rng.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
         }
     }
 }
